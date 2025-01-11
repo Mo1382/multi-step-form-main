@@ -16,3 +16,10 @@
   font-size: 14px;
   font-weight: 400;
 }
+@mixin absolute-full-width-height {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}

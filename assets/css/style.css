@@ -21,4 +21,498 @@ button {
 textarea {
   resize: none;
   field-sizing: content;
+}
+
+input {
+  outline: none;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: #f0f6ff;
+}
+
+.main-container {
+  margin: 105px auto;
+  max-width: 940px;
+  width: 100%;
+  display: flex;
+  box-shadow: 0px 12px 32px 0px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.main-container .steps-wrapper {
+  flex-basis: 30%;
+  padding: 16px 0 16px 16px;
+}
+.main-container .steps-wrapper .steps {
+  height: 100%;
+  border-radius: 10px;
+  background-image: url(../images/bg-sidebar-desktop.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 40px 32px;
+}
+.main-container .steps-wrapper .steps .step {
+  display: flex;
+  margin-bottom: 32px;
+}
+.main-container .steps-wrapper .steps .step .step-number {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+}
+.main-container .steps-wrapper .steps .step .step-desc .step-number-text {
+  font-size: 12px;
+  font-weight: 400;
+  color: #adbeff;
+  margin-bottom: 3px;
+}
+.main-container .steps-wrapper .steps .step .step-desc .step-name {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.98px;
+}
+.main-container .steps-wrapper .steps .step.active .step-number {
+  background-color: #bfe2fd;
+  color: #02295a;
+}
+.main-container .forms-wrapper {
+  flex-basis: 70%;
+  position: relative;
+  height: 600px;
+}
+.main-container .forms-wrapper .main-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 56px 98px 32px;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+.main-container .forms-wrapper .main-form.active {
+  z-index: 1;
+  opacity: 1;
+}
+.main-container .forms-wrapper .main-form .form-header {
+  margin-bottom: 41px;
+}
+.main-container .forms-wrapper .main-form .form-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #02295a;
+  margin-bottom: 12px;
+}
+.main-container .forms-wrapper .main-form .form-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: #9699ab;
+}
+.main-container .forms-wrapper .main-form .form-footer .primary-btn {
+  width: 123px;
+  height: 48px;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.main-container .forms-wrapper .main-form .form-footer .next-btn {
+  background-color: #02295a;
+}
+.main-container .forms-wrapper .main-form .form-footer .confirm-btn {
+  background-color: #473dff;
+}
+.main-container .forms-wrapper .main-form .form-footer .secondary-btn {
+  padding: 4px;
+  cursor: pointer;
+  color: #9699ab;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+  background-color: transparent;
+}
+.main-container .forms-wrapper .main-form .form-footer .secondary-btn:hover {
+  color: #02295a;
+}
+.main-container .forms-wrapper .main-form:not(#form-step-1) .form-footer {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+.main-container .forms-wrapper .main-form:not(#form-step-1) .form-footer .back-btn {
+  position: absolute;
+  bottom: 150%;
+  left: -4px;
+  transform: translateY(-10px);
+}
+.main-container .forms-wrapper .main-form:not(#form-step-1) .form-footer .next-btn,
+.main-container .forms-wrapper .main-form:not(#form-step-1) .form-footer .confirm-btn {
+  position: absolute;
+  right: 0;
+  bottom: 150%;
+}
+.main-container .forms-wrapper #form-step-1 .form-body .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+.main-container .forms-wrapper #form-step-1 .form-body .form-group label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #02295a;
+  margin-bottom: 8px;
+}
+.main-container .forms-wrapper #form-step-1 .form-body .form-group input {
+  width: 100%;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #d6d9e6;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: border-color 0.3s ease-in-out;
+  color: #02295a;
+}
+.main-container .forms-wrapper #form-step-1 .form-body .form-group input::-moz-placeholder {
+  font-size: 16px;
+  font-weight: 500;
+  color: #9699ab;
+}
+.main-container .forms-wrapper #form-step-1 .form-body .form-group input::placeholder {
+  font-size: 16px;
+  font-weight: 500;
+  color: #9699ab;
+}
+.main-container .forms-wrapper #form-step-1 .form-body .form-group input:focus {
+  border-color: #544c95;
+}
+.main-container .forms-wrapper #form-step-1 .form-body .form-group.form-group-error {
+  position: relative;
+}
+.main-container .forms-wrapper #form-step-1 .form-body .form-group.form-group-error input {
+  border-color: #ed3548;
+}
+.main-container .forms-wrapper #form-step-1 .form-body .form-group.form-group-error::after {
+  content: "This field is required";
+  position: absolute;
+  color: #ed3548;
+  font-size: 14px;
+  font-weight: 700;
+  top: 0;
+  right: 0;
+}
+.main-container .forms-wrapper #form-step-1 .form-footer {
+  direction: rtl;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans {
+  display: flex;
+  margin-bottom: 32px;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans .plan {
+  border: 1px solid #d6d9e6;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 20px 16px 16px;
+  transition: border-color 0.3s ease-in-out;
+  flex-basis: 33.3333333333%;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans .plan:not(:last-child) {
+  margin-right: 18px;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans .plan .plan-icon {
+  margin-bottom: 42px;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans .plan .plan-icon svg {
+  width: 40px;
+  height: 40px;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans .plan .plan-desc .plan-name {
+  color: #02295a;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans .plan .plan-desc .plan-price {
+  font-size: 14px;
+  font-weight: 400;
+  color: #9699ab;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans .plan.yearly {
+  padding-bottom: 18px;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans .plan.yearly .plan-off {
+  font-size: 12px;
+  font-weight: 400;
+  color: #02295a;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans .plan.yearly .plan-name,
+.main-container .forms-wrapper #form-step-2 .form-body .plans .plan.yearly .plan-price {
+  margin-bottom: 7px;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans .plan.active {
+  border-color: #544c95;
+  background-color: #f3f5fd;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans .plan:hover {
+  border-color: #544c95;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans-time {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 46px;
+  border-radius: 8px;
+  background-color: #f3f5fd;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans-time .plan-time {
+  font-size: 14px;
+  font-weight: 500;
+  color: #9699ab;
+  transition: color 0.3s ease-in-out;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans-time .plan-time.active {
+  color: #02295a;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans-time .toggle {
+  margin: 0 24px;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans-time .toggle input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans-time .toggle input:checked + label::after {
+  left: 22px !important;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans-time .toggle label {
+  display: inline-block;
+  width: 38px;
+  height: 20px;
+  border-radius: 100px;
+  background-color: #02295a;
+  position: relative;
+  cursor: pointer;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans-time .toggle label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  transition: left 0.3s ease-in-out;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans-time .toggle.left label::after {
+  left: 4px;
+}
+.main-container .forms-wrapper #form-step-2 .form-body .plans-time .toggle.right label::after {
+  left: 22px;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on {
+  width: 100%;
+  border: 1px solid #d6d9e6;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  padding: 20px 24px 21px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on .add-on-left {
+  display: flex;
+  align-items: center;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on .add-on-left .add-on-check {
+  margin-right: 24px;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on .add-on-left .add-on-check input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on .add-on-left .add-on-check label {
+  display: inline-block;
+  width: 20px;
+  position: relative;
+  height: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  border: 1px solid #d6d9e6;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on .add-on-left .add-on-check label::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-image: url("../images/icon-checkmark.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on .add-on-left .add-on-desc .add-on-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #02295a;
+  margin-bottom: 6px;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on .add-on-left .add-on-desc .add-on-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: #9699ab;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on .add-on-right .add-on-price {
+  font-size: 14px;
+  font-weight: 400;
+  color: #544c95;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on.active {
+  background-color: #f3f5fd;
+  border-color: #544c95;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on.active .add-on-check label {
+  background-color: #473dff;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on.active .add-on-check label::after {
+  opacity: 1;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on:hover {
+  border-color: #544c95;
+}
+.main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on:not(:last-child) {
+  margin-bottom: 16px;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-details {
+  padding: 20px 24px 24px;
+  background-color: #f3f5fd;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-plan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 26px;
+  border-bottom: 1px solid #d6d9e6;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-plan .checkout-plan-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #02295a;
+  margin-bottom: 6px;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-plan .change-plan-time-btn {
+  font-size: 14px;
+  font-weight: 400;
+  color: #9699ab;
+  text-decoration-line: underline;
+  background-color: transparent;
+  text-decoration-thickness: 1.82px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-plan .change-plan-time-btn:hover {
+  color: #473dff;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-plan .checkout-plan-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #02295a;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-add-ons {
+  padding-top: 20px;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-add-ons .checkout-add-on {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-add-ons .checkout-add-on .checkout-add-on-name {
+  font-size: 14px;
+  font-weight: 400;
+  color: #9699ab;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-add-ons .checkout-add-on .checkout-add-on-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #02295a;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-add-ons .checkout-add-on:not(:last-child) {
+  margin-bottom: 20px;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-total {
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-total .checkout-total-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: #9699ab;
+}
+.main-container .forms-wrapper #form-step-4 .form-body .checkout-total .checkout-total-price {
+  color: #473dff;
+  font-size: 20px;
+  font-weight: 700;
+}
+.main-container .forms-wrapper #thank-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-container .forms-wrapper #thank-page .thank-page-container {
+  text-align: center;
+}
+.main-container .forms-wrapper #thank-page .thank-page-container .thank-icon {
+  margin-bottom: 32px;
+}
+.main-container .forms-wrapper #thank-page .thank-page-container .thank-icon svg {
+  width: 80px;
+  height: 80px;
+}
+.main-container .forms-wrapper #thank-page .thank-page-container .thank-page-title {
+  margin-bottom: 16px;
+}
+.main-container .forms-wrapper #thank-page .thank-page-container .thank-page-subtitle {
+  text-align: center;
+  line-height: 25px;
+}
+
+@media (max-width: 1038px) {
+  .main-container {
+    margin-left: 48px;
+    margin-right: 48px;
+  }
 }/*# sourceMappingURL=style.css.map */
