@@ -37,21 +37,11 @@ body {
   background-color: #f0f6ff;
 }
 
-.main-container {
-  margin: 105px auto;
-  max-width: 940px;
-  width: 100%;
-  display: flex;
-  box-shadow: 0px 12px 32px 0px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-}
-.main-container .steps-wrapper {
+.steps-wrapper {
   flex-basis: 30%;
   padding: 16px 0 16px 16px;
 }
-.main-container .steps-wrapper .steps {
+.steps-wrapper .steps {
   height: 100%;
   border-radius: 10px;
   background-image: url(../images/bg-sidebar-desktop.svg);
@@ -60,11 +50,11 @@ body {
   background-size: cover;
   padding: 40px 32px;
 }
-.main-container .steps-wrapper .steps .step {
+.steps-wrapper .steps .step {
   display: flex;
   margin-bottom: 32px;
 }
-.main-container .steps-wrapper .steps .step .step-number {
+.steps-wrapper .steps .step .step-number {
   width: 34px;
   height: 34px;
   border-radius: 50%;
@@ -77,21 +67,32 @@ body {
   align-items: center;
   margin-right: 16px;
 }
-.main-container .steps-wrapper .steps .step .step-desc .step-number-text {
+.steps-wrapper .steps .step .step-desc .step-number-text {
   font-size: 12px;
   font-weight: 400;
   color: #adbeff;
   margin-bottom: 3px;
 }
-.main-container .steps-wrapper .steps .step .step-desc .step-name {
+.steps-wrapper .steps .step .step-desc .step-name {
   color: #ffffff;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.98px;
 }
-.main-container .steps-wrapper .steps .step.active .step-number {
+.steps-wrapper .steps .step.active .step-number {
   background-color: #bfe2fd;
   color: #02295a;
+}
+
+.main-container {
+  margin: 105px auto;
+  max-width: 940px;
+  width: 100%;
+  display: flex;
+  box-shadow: 0px 12px 32px 0px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
 }
 .main-container .forms-wrapper {
   flex-basis: 70%;
@@ -99,20 +100,18 @@ body {
   height: 600px;
 }
 .main-container .forms-wrapper .main-form {
-  display: flex;
+  display: none !important;
   flex-direction: column;
   justify-content: space-between;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   padding: 56px 98px 32px;
   z-index: 0;
   opacity: 0;
   transition: opacity 0.6s ease-in-out;
 }
 .main-container .forms-wrapper .main-form.active {
+  display: flex !important;
   z-index: 1;
   opacity: 1;
 }
@@ -129,33 +128,6 @@ body {
   font-size: 16px;
   font-weight: 400;
   color: #9699ab;
-}
-.main-container .forms-wrapper .main-form .form-footer .primary-btn {
-  width: 123px;
-  height: 48px;
-  border-radius: 6px;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-}
-.main-container .forms-wrapper .main-form .form-footer .next-btn {
-  background-color: #02295a;
-}
-.main-container .forms-wrapper .main-form .form-footer .confirm-btn {
-  background-color: #473dff;
-}
-.main-container .forms-wrapper .main-form .form-footer .secondary-btn {
-  padding: 4px;
-  cursor: pointer;
-  color: #9699ab;
-  font-size: 16px;
-  font-weight: 500;
-  transition: color 0.3s ease-in-out;
-  background-color: transparent;
-}
-.main-container .forms-wrapper .main-form .form-footer .secondary-btn:hover {
-  color: #02295a;
 }
 .main-container .forms-wrapper .main-form:not(#form-step-1) .form-footer {
   position: relative;
@@ -177,6 +149,8 @@ body {
 .main-container .forms-wrapper #form-step-1 .form-body .form-group {
   display: flex;
   flex-direction: column;
+}
+.main-container .forms-wrapper #form-step-1 .form-body .form-group:not(:last-child) {
   margin-bottom: 24px;
 }
 .main-container .forms-wrapper #form-step-1 .form-body .form-group label {
@@ -510,9 +484,224 @@ body {
   line-height: 25px;
 }
 
+.form-footer .primary-btn {
+  width: 123px;
+  height: 48px;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.form-footer .next-btn {
+  background-color: #02295a;
+}
+.form-footer .confirm-btn {
+  background-color: #473dff;
+}
+.form-footer .secondary-btn {
+  padding: 4px;
+  cursor: pointer;
+  color: #9699ab;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+  background-color: transparent;
+}
+.form-footer .secondary-btn:hover {
+  color: #02295a;
+}
+
 @media (max-width: 1038px) {
   .main-container {
     margin-left: 48px;
     margin-right: 48px;
+    width: calc(100% - 96px);
+  }
+}
+@media screen and (max-width: 600px) {
+  .steps-wrapper {
+    width: 100%;
+    flex-basis: unset;
+    padding: 0;
+  }
+  .steps-wrapper .steps {
+    border-radius: 0;
+    padding: 32px 0 106px;
+    background-image: url(../images/bg-sidebar-mobile.svg);
+  }
+  .steps-wrapper .steps ul {
+    display: flex;
+    justify-content: center;
+  }
+  .steps-wrapper .steps ul .step {
+    margin-bottom: 0;
+  }
+  .steps-wrapper .steps ul .step:not(:last-child) {
+    margin-right: 16px;
+  }
+  .steps-wrapper .steps ul .step .step-number {
+    margin-right: 0;
+  }
+  .main-container {
+    margin: -74px 16px;
+    width: calc(100% - 32px);
+  }
+  .main-container .forms-wrapper {
+    flex-basis: 100%;
+    height: 376px;
+    height: auto;
+  }
+  .main-container .forms-wrapper .main-form {
+    padding: 32px 24px;
+  }
+  .main-container .forms-wrapper .main-form .form-title {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+  .main-container .forms-wrapper .main-form .form-subtitle {
+    line-height: 155%;
+  }
+  .main-container .forms-wrapper .main-form:not(#form-step-1) .form-header {
+    margin-bottom: 21px;
+  }
+  .main-container .forms-wrapper .main-form:not(#form-step-1) .form-title {
+    margin-bottom: 10px;
+  }
+  .main-container .forms-wrapper #form-step-1 .form-header {
+    margin-bottom: 17px;
+  }
+  .main-container .forms-wrapper #form-step-1 .form-body .form-group:not(:last-child) {
+    margin-bottom: 16px;
+  }
+  .main-container .forms-wrapper #form-step-1 .form-body .form-group label {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  .main-container .forms-wrapper #form-step-1 .form-body .form-group input {
+    height: 44px;
+    border-radius: 4px;
+    font-size: 15px;
+  }
+  .main-container .forms-wrapper #form-step-1 .form-body .form-group input::-moz-placeholder {
+    font-size: 14px;
+  }
+  .main-container .forms-wrapper #form-step-1 .form-body .form-group input::placeholder {
+    font-size: 14px;
+  }
+  .main-container .forms-wrapper #form-step-1 .form-body .form-group.form-group-error::after {
+    font-size: 12px;
+  }
+  .main-container .forms-wrapper #form-step-2 .form-body .plans {
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+  .main-container .forms-wrapper #form-step-2 .form-body .plans .plan {
+    display: flex;
+    border: 1px solid #d6d9e6;
+    padding: 17px 16px 19px;
+    flex-basis: 100%;
+  }
+  .main-container .forms-wrapper #form-step-2 .form-body .plans .plan:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+  .main-container .forms-wrapper #form-step-2 .form-body .plans .plan .plan-icon {
+    margin: 0 14px 0 0;
+  }
+  .main-container .forms-wrapper #form-step-2 .form-body .plans .plan .plan-desc .plan-name {
+    margin-bottom: 6px;
+  }
+  .main-container .forms-wrapper #form-step-2 .form-body .plans .yeraly .plan-price {
+    margin-bottom: 8px;
+  }
+  .main-container .forms-wrapper #form-step-2 .form-body .plans-time {
+    height: 48px;
+  }
+  .main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on {
+    padding: 14px 16px;
+  }
+  .main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on .add-on-left .add-on-check {
+    margin-right: 16px;
+  }
+  .main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on .add-on-left .add-on-desc .add-on-title {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on .add-on-left .add-on-desc .add-on-subtitle {
+    font-size: 12px;
+  }
+  .main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on .add-on-right .add-on-price {
+    font-size: 13px;
+  }
+  .main-container .forms-wrapper #form-step-3 .form-body .add-ons .add-on:not(:last-child) {
+    margin-bottom: 12px;
+  }
+  .main-container .forms-wrapper #form-step-4 .form-body .checkout-details {
+    padding: 18px 16px;
+    margin-bottom: 26px;
+  }
+  .main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-plan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+  }
+  .main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-plan .checkout-plan-title {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  .main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-plan .checkout-plan-price {
+    font-size: 14px;
+  }
+  .main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-add-ons {
+    padding-top: 16px;
+  }
+  .main-container .forms-wrapper #form-step-4 .form-body .checkout-details .checkout-add-ons .checkout-add-on:not(:last-child) {
+    margin-bottom: 16px;
+  }
+  .main-container .forms-wrapper #form-step-4 .form-body .checkout-total {
+    padding: 0 16px;
+  }
+  .main-container .forms-wrapper #form-step-4 .form-body .checkout-total .checkout-total-price {
+    font-size: 16px;
+  }
+  .main-container .forms-wrapper #thank-page {
+    padding: 78px 24px;
+  }
+  .main-container .forms-wrapper #thank-page .thank-page-container .thank-icon {
+    margin-bottom: 24px;
+  }
+  .main-container .forms-wrapper #thank-page .thank-page-container .thank-icon svg {
+    width: 56px;
+    height: 56px;
+  }
+  .main-container .forms-wrapper #thank-page .thank-page-container .thank-page-title {
+    margin-bottom: 12px;
+  }
+  .form-footer {
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    text-align: right;
+    padding: 16px;
+  }
+  .form-footer:has(.secondary-btn) {
+    display: flex;
+    justify-content: space-between;
+  }
+  .form-footer .primary-btn {
+    width: 97px;
+    height: 40px;
+    font-size: 14px;
+  }
+  .form-footer .secondary-btn {
+    font-size: 14px;
+  }
+  .form-footer .back-btn {
+    transform: translateX(-4px);
   }
 }/*# sourceMappingURL=style.css.map */
