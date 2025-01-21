@@ -1,0 +1,25 @@
+@mixin flex-items-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flex-items-sides {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin fs16-fw500 {
+  font-size: 16px;
+  font-weight: 500;
+}
+@mixin fs14-fw400 {
+  font-size: 14px;
+  font-weight: 400;
+}
+@mixin absolute-full-width-height {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
