@@ -73,8 +73,9 @@ body {
     position: relative;
     height: (512px + 56px + 32px);
     .main-form {
-      // display: flex;
-      display: none !important;
+      display: flex;
+      visibility: hidden;
+      // display: none !important;
       flex-direction: column;
       justify-content: space-between;
       // @include absolute-full-width-height;
@@ -84,8 +85,9 @@ body {
       opacity: 0;
       transition: opacity 0.6s ease-in-out;
       &.active {
-        display: flex !important;
+        // display: flex !important;
         opacity: 1;
+        visibility: visible;
       }
       .form-header {
         margin-bottom: 41px;

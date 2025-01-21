@@ -53,12 +53,12 @@ const appState = {
   ],
 };
 
-appState.plans.forEach(
-  plan => (plan.yearlyPrice = plan.monthlyPrice * (12 - plan.freeMonths))
-);
+appState.plans.forEach(plan => {
+  plan.yearlyPrice = plan.monthlyPrice * (12 - appState.freeMonths);
+});
 
 appState.addOns.forEach(
-  addOn => (addOn.yearlyPrice = addOn.monthlyPrice * (12 - addOn.freeMonths))
+  addOn => (addOn.yearlyPrice = addOn.monthlyPrice * (12 - appState.freeMonths))
 );
 
 // Elements seletion
@@ -66,7 +66,7 @@ const bodyEl = document.body;
 
 // Data
 const screenWidth = window.innerWidth;
-const changeLayoutBreakpoint = 600;
+const changeLayoutBreakpoint = 856;
 let formStepsFuncs;
 
 // Functions
@@ -82,6 +82,17 @@ let formStepsFuncs;
 const renderInUI = function (html, wrapperEl) {
   wrapperEl.textContent = "";
   wrapperEl.insertAdjacentHTML("afterbegin", html);
+};
+
+/**
+ * Displays the form with an animation by adding the 'active' class to the form element.
+ * The function uses a timeout to ensure the class is added after the current call stack is cleared.
+ */
+const showFormAnimation = function () {
+  setTimeout(() => {
+    const formRendered = document.querySelector(".main-form");
+    formRendered.classList.add("active");
+  }, 0);
 };
 
 /**
@@ -114,6 +125,10 @@ const renderFooter = function (stepNum, wrapperEl = undefined) {
           <button type="submit" form="form-step-${stepNum}" class="primary-btn confirm-btn">Confirm</button>
         </div>
     `;
+  else if (stepNum === 5) {
+    wrapperEl.querySelector(".form-footer").remove();
+    return;
+  }
 
   if (wrapperEl) {
     wrapperEl.querySelector(".form-footer").remove();
@@ -289,7 +304,9 @@ const renderStep1 = function (appData, wrapperEl) {
     `;
 
   const step1HTML = `
-    <form action="" class="main-form active" id="form-step-1">
+    <form action="" class="main-form ${
+      wrapperEl ? "" : "active"
+    }" id="form-step-1">
         <div class="form-top">
           <div class="form-header">
             <h2 class="form-title">Personal info</h2>
@@ -305,7 +322,10 @@ const renderStep1 = function (appData, wrapperEl) {
       </form>
     `;
 
-  if (wrapperEl) renderInUI(step1HTML, wrapperEl);
+  if (wrapperEl) {
+    renderInUI(step1HTML, wrapperEl);
+    showFormAnimation();
+  }
 
   return step1HTML;
 };
@@ -349,7 +369,7 @@ const renderStep2 = function (appData, wrapperEl) {
   const plansHTML = plansHTMLArr.join("");
 
   const step2HTML = `
-<form action="" class="main-form active ${
+<form action="" class="main-form ${
     appData.isMonthly ? "" : "yearly"
   }" id="form-step-2">
         <div class="form-top">
@@ -365,8 +385,10 @@ const renderStep2 = function (appData, wrapperEl) {
               <div class="plan-time ${
                 appData.isMonthly ? "active" : ""
               }" id="plan-monthly">Monthly</div>
-              <div class="toggle ${appData.isMonthly ? "left" : "right"}">
-                <input type="checkbox" id="toggle">
+              <div class="toggle left">
+                <input type="checkbox" ${
+                  appData.isMonthly ? "" : "checked"
+                } id="toggle">
                 <label for="toggle"></label>
               </div>
               <div class="plan-time ${
@@ -380,7 +402,10 @@ const renderStep2 = function (appData, wrapperEl) {
       </form>
     `;
 
-  if (wrapperEl) renderInUI(step2HTML, wrapperEl);
+  if (wrapperEl) {
+    renderInUI(step2HTML, wrapperEl);
+    showFormAnimation();
+  }
 
   return step2HTML;
 };
@@ -429,7 +454,7 @@ const renderStep3 = function (appData, wrapperEl) {
   const addOnsHTML = addOnsHTMLArr.join("");
 
   const step3HTML = `
-    <form action="" class="main-form active" id="form-step-3">
+    <form action="" class="main-form" id="form-step-3">
         <div class="form-top">
           <div class="form-header">
             <h2 class="form-title">Pick add-ons</h2>
@@ -445,7 +470,10 @@ const renderStep3 = function (appData, wrapperEl) {
       </form>
   `;
 
-  if (wrapperEl) renderInUI(step3HTML, wrapperEl);
+  if (wrapperEl) {
+    renderInUI(step3HTML, wrapperEl);
+    showFormAnimation();
+  }
 
   return step3HTML;
 };
@@ -467,7 +495,7 @@ const renderStep4 = function (appData, wrapperEl) {
   const activeAddOns = filterItems(appData.addOns);
 
   const step4HTML = `
- <form action="" class="main-form active" id="form-step-4">
+ <form action="" class="main-form" id="form-step-4">
         <div class="form-top">
           <div class="form-header">
             <h2 class="form-title">Finishing up</h2>
@@ -540,7 +568,10 @@ const renderStep4 = function (appData, wrapperEl) {
       </form>
   `;
 
-  if (wrapperEl) renderInUI(step4HTML, wrapperEl);
+  if (wrapperEl) {
+    renderInUI(step4HTML, wrapperEl);
+    showFormAnimation();
+  }
 
   return step4HTML;
 };
@@ -554,7 +585,7 @@ const renderStep4 = function (appData, wrapperEl) {
  */
 const renderThankPage = function (_, wrapperEl) {
   const thankHTML = `
-  <div class="main-form active" id="thank-page">
+  <div class="main-form" id="thank-page">
         <div class="thank-page-container">
           <div class="thank-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
@@ -575,7 +606,10 @@ const renderThankPage = function (_, wrapperEl) {
       </div>
     `;
 
-  if (wrapperEl) renderInUI(thankHTML, wrapperEl);
+  if (wrapperEl) {
+    renderInUI(thankHTML, wrapperEl);
+    showFormAnimation();
+  }
 
   return thankHTML;
 };
@@ -631,6 +665,175 @@ const changeActiveStep = function (stepNum) {
 };
 
 /**
+ * Adds an error class to the parent element of each input in the provided list.
+ *
+ * @param {HTMLInputElement[]} emptyInputs - An array of input elements that failed validation.
+ */
+const validation1FailedResp = function (emptyInputs) {
+  emptyInputs.forEach(input =>
+    input.parentElement.classList.add("form-group-error")
+  );
+};
+
+/**
+ * Updates the application data with the values from the step 1 input elements.
+ *
+ * @param {Object} appData - The application data object to be updated.
+ * @param {HTMLInputElement[]} inputEls - An array of input elements from the step 1 form.
+ */
+const getStep1Data = function (appData, inputEls) {
+  const step1InputsValues = inputEls.map(input => input.value);
+
+  // Update appState
+  const [name, emailAddress, phoneNumber] = step1InputsValues;
+  appData.inputs = { name, emailAddress, phoneNumber };
+  //   console.log(appData.inputs);
+};
+
+/**
+ * Updates the active plan in the appData object based on the selected element.
+ *
+ * @param {Object} appData - The application data containing the plans.
+ * @param {Array} appData.plans - The list of plans in the application data.
+ * @param {Object} activeEl - The DOM element representing the active plan.
+ */
+const updateActivePlan = function (appData, activeEl) {
+  const activePlanText = activeEl
+    .querySelector(".plan-name")
+    .textContent.trim();
+
+  appData.plans.forEach(plan => (plan.isSelected = false));
+
+  const activePlan = appData.plans.find(plan => plan.name === activePlanText);
+  activePlan.isSelected = true;
+};
+
+/**
+ * Updates the plan time in the application data based on the active element's text content.
+ *
+ * @param {Object} appData - The application data object.
+ * @param {boolean} appData.isMonthly - Indicates if the plan is monthly.
+ * @param {HTMLElement} activeEl - The active HTML element containing the time text.
+ */
+const updatePlanTime = function (appData, activeEl) {
+  const activeTimeText = activeEl.textContent.trim();
+
+  appData.isMonthly = activeTimeText === "Monthly" ? true : false;
+};
+
+/**
+ * Updates the application data with the active plan and plan time elements.
+ *
+ * @param {Object} appData - The application data object to be updated.
+ */
+const getStep2Data = function (appData) {
+  const activePlanEl = document.querySelector(".plan.active");
+  const activeTimeEl = document.querySelector(".plan-time.active");
+
+  updateActivePlan(appData, activePlanEl);
+  updatePlanTime(appData, activeTimeEl);
+};
+
+/**
+ * Updates the selection state of add-ons based on the provided active elements.
+ *
+ * @param {HTMLElement[]} activeEls - An array of active HTML elements containing add-on information.
+ */
+const getStep3Data = function (activeEls) {
+  const activeAddOnsNames = activeEls.map(
+    el => el.querySelector(".add-on-title").textContent
+  );
+
+  appState.addOns.forEach(addOn => (addOn.isSelected = false));
+
+  const activeAddOns = appState.addOns.filter(addOn =>
+    activeAddOnsNames.includes(addOn.name)
+  );
+
+  activeAddOns.forEach(addOn => (addOn.isSelected = true));
+};
+
+const changeScreensLayout = function (appData) {
+  const windowWidth = window.innerWidth;
+
+  const stepsWrapperEl = document.querySelector(".steps-wrapper");
+  const mainContainerEl = document.querySelector(".main-container");
+  const mainFormEl = document.querySelector(".main-form");
+  const footerEl = document.querySelector(".form-footer");
+
+  if (windowWidth <= changeLayoutBreakpoint && appData.isScreenDesktop) {
+    appData.isScreenDesktop = false;
+
+    stepsWrapperEl.remove();
+    renderStepsWrapper(appData, bodyEl);
+
+    if (appData.formStep < 4) {
+      mainContainerEl.after(footerEl);
+    }
+  }
+
+  if (windowWidth > changeLayoutBreakpoint && !appData.isScreenDesktop) {
+    appData.isScreenDesktop = true;
+
+    stepsWrapperEl.remove();
+    renderStepsWrapper(appData, mainContainerEl);
+
+    if (appData.formStep < 4) mainFormEl.append(footerEl);
+  }
+};
+
+/**
+ * Renders the new step of the application form.
+ *
+ * This function is responsible for rendering the appropriate form step based on the
+ * current `formStep` value in the `appData` object. It calls the corresponding
+ * `renderStep` function from the `formStepsFuncs` array, updates the active step
+ * indicator, and renders the footer if the screen is not in desktop mode.
+ *
+ * @param {Object} appData - The application data object.
+ * @param {number} appData.formStep - The current step of the form.
+ * @param {boolean} appData.isScreenDesktop - Indicates if the screen is in desktop mode.
+ * @param {HTMLElement} bodyEl - The HTML element representing the body of the page.
+ */
+const renderNewStep = function (appData, bodyEl) {
+  const formsWrapperEl = bodyEl.querySelector(".forms-wrapper");
+
+  formStepsFuncs[appData.formStep - 1](appData, formsWrapperEl);
+
+  changeActiveStep(appData.formStep);
+
+  if (!appData.isScreenDesktop) renderFooter(appData.formStep, bodyEl);
+};
+
+/**
+ * Resets the application data to its initial state.
+ *
+ * @param {Object} appData - The application data object.
+ * @param {number} appData.formStep - The current step of the form.
+ * @param {boolean} appData.isMonthly - Indicates if the plan is monthly.
+ * @param {Object} appData.inputs - The user inputs.
+ * @param {Array} appData.plans - The available plans.
+ * @param {boolean} appData.plans[].isSelected - Indicates if the plan is selected.
+ * @param {Array} appData.addOns - The available add-ons.
+ * @param {boolean} appData.addOns[].isSelected - Indicates if the add-on is selected.
+ */
+const resetAppData = function (appData) {
+  appData.formStep = 1;
+  appData.isMonthly = true;
+  appData.inputs = {};
+
+  appData.plans.forEach(plan => {
+    plan.isSelected = false;
+  });
+  appData.plans[0].isSelected = true;
+
+  appData.addOns.forEach(addOn => {
+    addOn.isSelected = false;
+  });
+  appData.addOns[0].isSelected = true;
+};
+
+/**
  * Initializes the application state and renders the initial HTML.
  *
  * This function sets the `isScreenDesktop` property of `appState` based on the
@@ -662,32 +865,7 @@ const formsWrapperEl = document.querySelector(".forms-wrapper");
 // Event listeners
 // Change layout when screen switches to desktop/screen mode
 window.addEventListener("resize", function (e) {
-  const windowWidth = window.innerWidth;
-
-  const stepsWrapperEl = document.querySelector(".steps-wrapper");
-  const mainContainerEl = document.querySelector(".main-container");
-  const mainFormEl = document.querySelector(".main-form");
-  const footerEl = document.querySelector(".form-footer");
-
-  if (windowWidth <= 600 && appState.isScreenDesktop) {
-    appState.isScreenDesktop = false;
-
-    stepsWrapperEl.remove();
-    renderStepsWrapper(appState, bodyEl);
-
-    if (appState.formStep < 4) {
-      mainContainerEl.after(footerEl);
-    }
-  }
-
-  if (windowWidth > 600 && !appState.isScreenDesktop) {
-    appState.isScreenDesktop = true;
-
-    stepsWrapperEl.remove();
-    renderStepsWrapper(appState, mainContainerEl);
-
-    if (appState.formStep < 4) mainFormEl.append(footerEl);
-  }
+  changeScreenDesktop(appState);
 });
 
 // Submit form when user clicks on next btn or presses Enter key
@@ -715,26 +893,100 @@ formsWrapperEl.addEventListener("submit", function (e) {
     // console.log(emptyInputs);
 
     if (emptyInputs.length > 0) {
-      emptyInputs.forEach(input =>
-        input.parentElement.classList.add("form-group-error")
-      );
+      validation1FailedResp(emptyInputs);
+
       // Stop form submission
       return;
-    } else {
-      const step1InputsValues = step1Inputs.map(input => input.value);
-
-      // Update appState
-      const [name, emailAddress, phoneNumber] = step1InputsValues;
-      appState.inputs = { name, emailAddress, phoneNumber };
-      //   console.log(appState.inputs);
-    }
+    } else getStep1Data(appState, step1Inputs);
   }
+
+  if (appState.formStep === 2) getStep2Data(appState);
+
+  if (appState.formStep === 3) {
+    const activeAddOnsEls = [...document.querySelectorAll(".add-on.active")];
+    getStep3Data(activeAddOnsEls);
+  }
+
+  //   if (appState.formStep === 4) resetAppData(appState);
+
+  //   console.log(appState);
 
   // Move to the next step
   appState.formStep++;
-  formStepsFuncs[appState.formStep - 1](appState, formsWrapperEl);
 
-  changeActiveStep(appState.formStep);
+  renderNewStep(appState, bodyEl);
+});
 
-  if (!appState.isScreenDesktop) renderFooter(appState.formStep, bodyEl);
+// Go to previous form when user clicks on back btn
+bodyEl.addEventListener("click", function (e) {
+  const clickedEl = e.target;
+
+  // Matching strategy
+  if (!clickedEl.classList.contains("back-btn")) return;
+
+  if (appState.formStep === 2) getStep2Data(appState);
+
+  if (appState.formStep === 3) {
+    const activeAddOnsEls = [...document.querySelectorAll(".add-on.active")];
+    getStep3Data(activeAddOnsEls);
+  }
+
+  // Move to the previous step
+  appState.formStep--;
+
+  renderNewStep(appState, bodyEl);
+});
+
+// Go to form step 2 when user clicks on change btn
+formsWrapperEl.addEventListener("click", function (e) {
+  const clickedEl = e.target;
+
+  if (!clickedEl.classList.contains("change-plan-time-btn")) return;
+
+  // Move to the second step
+  appState.formStep = 2;
+
+  renderNewStep(appState, bodyEl);
+});
+
+// Change active plan when user clicks on an inactive plan card
+formsWrapperEl.addEventListener("click", function (e) {
+  const clickedEl = e.target;
+  const planClicked = clickedEl.closest(".plan");
+
+  if (!planClicked || planClicked.classList.contains("active")) return;
+
+  const planEls = [...document.querySelectorAll(".plan")];
+  planEls.forEach(plan => plan.classList.remove("active"));
+
+  planClicked.classList.add("active");
+});
+
+// Change plan time when user clicks on montly/yerlay toggle
+formsWrapperEl.addEventListener("click", function (e) {
+  const clickedEl = e.target;
+  const toggleClicked = clickedEl.closest(`label[for="toggle"]`);
+
+  if (!toggleClicked) return;
+
+  const toggleInputEl = toggleClicked.previousElementSibling;
+  const monthlyTimeEl = toggleClicked
+    .closest(".plans-time")
+    .querySelector("#plan-monthly");
+  const yearlyTimeEl = toggleClicked
+    .closest(".plans-time")
+    .querySelector("#plan-yearly");
+
+  monthlyTimeEl.classList.toggle("active");
+  yearlyTimeEl.classList.toggle("active");
+});
+
+// Make addOn active/inactive when user clicks on its card
+formsWrapperEl.addEventListener("click", function (e) {
+  const clickedEl = e.target;
+  const addOnClicked = clickedEl.closest(".add-on");
+
+  if (!addOnClicked) return;
+
+  addOnClicked.classList.toggle("active");
 });
